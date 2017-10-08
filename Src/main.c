@@ -49,10 +49,10 @@ int main(void)
 	HAL_Init();
 	SystemClock_Config();
 
-	USART2_UART_Init(9600);
+	USART2_UART_Init(115200);
 	HAL_UART_Transmit(&huart2,  "usart2 ok\r\n", sizeof("usart2 ok\r\n")-1, 1000);
 
-	LPUART1_UART_Init(9600);
+	LPUART1_UART_Init(115200);
 	HAL_UART_Transmit(&hlpuart1,"lpuart1 ok\r\n",sizeof("lpuart1 ok\r\n")-1,1000);
 
 	while(1)
