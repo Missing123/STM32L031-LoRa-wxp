@@ -1,1 +1,4 @@
 # STM32L031-LoRa-wxp
+
+/MDK-ARM/TEST
+/MDK-ARM/startup_stm32l031xx.lst
