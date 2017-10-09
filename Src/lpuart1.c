@@ -1,6 +1,6 @@
 #include "lpuart1.h"
 #include "string.h"
-
+#include "usart2.h"
 UART_HandleTypeDef hlpuart1;
 
 uint8_t LPUART1_RX_BUF[LPUART1_RX_BUF_MAX];//Ω” ’ª∫¥Ê«¯
@@ -73,7 +73,7 @@ void LPUART1_RX_Data_Handle(void)
 
 		/************************************/
 		LPUART1_RX_BUF[LPUART1_RX_LEN] = 0;
-		printf("rcv:%s\r\n",LPUART1_RX_BUF);
+		printf("rcv:%s\r\n",USART2_RX_BUF);
 		/************************************/
 
 		LPUART1_RX_Reset();

@@ -1,6 +1,8 @@
+#include "main.h"
 #include "lpuart1.h"
 #include "usart2.h"
-
+#include "m91.h"
+#include "gpio.h"
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 	if(huart->Instance==USART2)
@@ -49,14 +51,16 @@ int main(void)
 	HAL_Init();
 	SystemClock_Config();
 
-	USART2_UART_Init(115200);
+	USART2_UART_Init(9600);
 	HAL_UART_Transmit(&huart2,  "usart2 ok\r\n", sizeof("usart2 ok\r\n")-1, 1000);
 
-	LPUART1_UART_Init(115200);
+	LPUART1_UART_Init(9600);
 	HAL_UART_Transmit(&hlpuart1,"lpuart1 ok\r\n",sizeof("lpuart1 ok\r\n")-1,1000);
-
+  M91_Init();
+	MX_GPIO_Init();
 	while(1)
 	{
+//		HAL_UART_Transmit(&hlpuart1,"LoRawan OK\r\n",sizeof("LoRawan OK\r\n")-1,1000);
 		HAL_Delay(500);
 	}
 }

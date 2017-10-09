@@ -1,4 +1,5 @@
 #include "usart2.h"
+#include "lpuart1.h"
 #include "string.h"
 #include "stdarg.h"
 
@@ -29,18 +30,17 @@ void u2_printf(char* fmt,...)
 #endif
 void USART2_UART_Init(uint32_t baudrate)
 {
-	huart2.Instance						= USART2;
-	huart2.Init.BaudRate				= baudrate;
-	huart2.Init.WordLength				= UART_WORDLENGTH_8B;
-	huart2.Init.StopBits				= UART_STOPBITS_1;
-	huart2.Init.Parity					= UART_PARITY_NONE;
-	huart2.Init.Mode					= UART_MODE_TX_RX;
-	huart2.Init.HwFlowCtl				= UART_HWCONTROL_NONE;
-	huart2.Init.OverSampling			= UART_OVERSAMPLING_16;
-	huart2.Init.OneBitSampling			= UART_ONE_BIT_SAMPLE_DISABLE;
+	huart2.Instance											= USART2;
+	huart2.Init.BaudRate								= baudrate;
+	huart2.Init.WordLength							= UART_WORDLENGTH_8B;
+	huart2.Init.StopBits								= UART_STOPBITS_1;
+	huart2.Init.Parity									= UART_PARITY_NONE;
+	huart2.Init.Mode										= UART_MODE_TX_RX;
+	huart2.Init.HwFlowCtl								= UART_HWCONTROL_NONE;
+	huart2.Init.OverSampling						= UART_OVERSAMPLING_16;
+	huart2.Init.OneBitSampling					= UART_ONE_BIT_SAMPLE_DISABLE;
 	huart2.AdvancedInit.AdvFeatureInit	= UART_ADVFEATURE_NO_INIT;
 	HAL_UART_Init(&huart2);
-
 	HAL_UART_Receive_IT(&huart2,   (uint8_t *)aRxBuffer2, RXBUFFERSIZE2);//该函数会开启接收中断：标志位UART_IT_RXNE，并且设置接收缓冲以及接收缓冲接收最大数据量
 }
 void USART2_RX_Reset(void)
@@ -72,7 +72,7 @@ void USART2_RX_Data_Handle(void)
 
 		/************************************/
 		USART2_RX_BUF[USART2_RX_LEN] = 0;
-		u2_printf("rcv:%s\r\n",USART2_RX_BUF);
+		u2_printf("rcv:%s\r\n",LPUART1_RX_BUF);
 		/************************************/
 
 		USART2_RX_Reset();
